@@ -10,7 +10,8 @@
  
  let currPlayer = 1; // active player: 1 or 2 , is a variable which stores who has won
  let board = []; // array of rows, each row is array of cells  (board[y][x])
- 
+ let htmlBoard = document.getElementById('board');
+
  /** makeBoard: create in-JS board structure:
   *    board = array of rows, each row is array of cells  (board[y][x])
   */
@@ -26,7 +27,7 @@
  /** makeHtmlBoard: make HTML table and row of column tops. */
  
  function makeHtmlBoard() {
- let htmlBoard = document.getElementById('board')
+ 
    // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
  
    // TODO: add comment for this code
@@ -89,22 +90,22 @@
   spot.append(boardPiece);
  }
  
+function clearBoard() {
+  htmlBoard.innerHTML = "";
+}
  /** endGame: announce game end */
- 
  function endGame(msg) {
    // TODO: pop up alert message
  // added setTimeout so that the final circle will show up before the alert
-   setTimeout(function() { alert(msg); }, 100);
+   setTimeout(function() { confirm(msg); }, 500);
+   if (confirm) {
+    setTimeout(function() { clearBoard(); }, 1000);
+    setTimeout(function() { makeHtmlBoard(); }, 1000);
+   }
  }
  
- function clearBoard() {
-     if (checkForWin()) {
-     htmlBoard.innerHTML = "";
-     board.innerHTML = "";
-     restart.style.display="none" 
-     }
- }
  
+
  /** handleClick: handle click of column top to play piece */
  
  function handleClick(evt) {
@@ -187,5 +188,5 @@
  
  makeBoard();
  makeHtmlBoard();
- clearBoard();
+
  
